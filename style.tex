@@ -1,7 +1,21 @@
 %!TEX root = thesis.tex
 
 % Set german to default language and load english as well
-\usepackage[english,ngerman]{babel}
+%\usepackage[english,ngerman]{babel} % killed german
+\usepackage[english]{babel}
+
+\usepackage{graphicx}
+\usepackage{rotating}
+
+% For table rotating in the appendix...
+%\usepackage{adjustbox}
+%\usepackage{varwidth}
+
+
+\usepackage{wrapfig}
+\usepackage{booktabs}
+\newcommand{\ra}[1]{\renewcommand{\arraystretch}{#1}}
+\usepackage{float}
 
 % Set UTF8 as input encoding
 \usepackage[utf8]{inputenc}
@@ -16,20 +30,36 @@
 \usepackage{courier}
 % Load package to configure header and footer
 \usepackage{scrlayer-scrpage}
+% Package for bold font in math equations
+\usepackage{bm}
+
+% Different geometry on Table of Contents page
+\usepackage{afterpage}
+\usepackage{geometry}
+
 
 % Set some options regarding the document layout. See KOMA guide
 \KOMAoptions{%
   paper=a4,
-  fontsize=12pt,
+  fontsize=11.5pt,
   parskip=half,
   headings=normal,
+  twoside,
   BCOR=1cm,
   headsepline,
   headsepline=0.5pt,
-  DIV=12}
+  DIV=13}
+  
+
 
 % do not align bottom of pages
 \raggedbottom
+
+\usepackage{caption}
+
+\DeclareCaptionLabelFormat{andtable}{#1~#2  \&  \tablename~\thetable}
+
+
 
 % set style of captions
 \setcapindent{0pt} % do not indent second line of captions
@@ -38,7 +68,14 @@
 \setcapwidth[c]{0.9\textwidth}
 
 % set the style of the bibliography
-\bibliographystyle{alphadin}
+%\bibliographystyle{alphadin}
+\usepackage{natbib}
+%\bibliographystyle{kluwer}
+\bibliographystyle{dcu}
+\bibpunct{(}{)}{,}{a}{,}{,}
+
+\setcitestyle{authoryear, aysep={,}}
+
 
 % load extended tabulars used in the list of abbreviation
 \usepackage{tabularx}
@@ -54,10 +91,19 @@
 
 % add main color to section headers
 \addtokomafont{chapter}{\color{maincolor}}
+\addtokomafont{chapter}{\mdseries}
 \addtokomafont{section}{\color{maincolor}}
+\addtokomafont{section}{\mdseries}
 \addtokomafont{subsection}{\color{maincolor}}
+\addtokomafont{subsection}{\mdseries}
 \addtokomafont{subsubsection}{\color{maincolor}}
+%\addtokomafont{subsubsection}{\mdseries}
+\addtokomafont{subsubsection}{\fontseries{sbc}\selectfont}
 \addtokomafont{paragraph}{\color{maincolor}}
+%\addtokomafont{paragraph}{\textbf\mdseries}
+\addtokomafont{paragraph}{\fontseries{sbc}\selectfont}
+\addtokomafont{descriptionlabel}{\mdseries}
+
 
 % do not print numbers next to each formula
 \usepackage{mathtools}
@@ -77,7 +123,8 @@
 \setkomafont{headsepline}{\color{maincolor}}
 
 % German guillemets quotes
-\usepackage[german=guillemets]{csquotes}
+%\usepackage[german=guillemets]{csquotes}
+\usepackage{csquotes}
 
 % load TikZ to draw diagrams
 \usepackage{tikz}
@@ -86,6 +133,12 @@
 \usetikzlibrary{%
   automata,%
   positioning,%
+  matrix,%
+  chains,
+  positioning,
+  decorations.pathreplacing,
+  arrows,
+  spy
 }
 
 % set some default options for TikZ -- in this case for automata
@@ -97,6 +150,22 @@
     minimum size=0pt
   }
 }
+
+
+% load & setup pgfplot for functions
+\usepackage{subfigure}
+\usepackage{pgfplots}
+%\usepackage[top=3cm,left=3cm,right=3cm,bottom=3cm]{geometry}
+\pgfplotsset{every axis/.append style={tick label style={/pgf/number format/fixed},font=
+\scriptsize,ylabel near ticks,xlabel near ticks,grid=major, ylabel style={rotate=-90,  
+align=justify, at={(axis description cs:0.4,.9)}, anchor=north east
+}}, 
+minor tick num=1, axis x line=middle, axis y line=middle, every inner x axis line/.append style={|->}, every inner y axis line/.append style={|->}} 
+
+\pgfplotsset{major grid style={dotted,black!50}}
+
+%py2tikz package
+\usepackage{pgf}
 
 % load listings package to typeset sourcecode
 \usepackage{listings}
@@ -142,14 +211,16 @@
 \usepackage{paralist}
 
 % load varioref and hyperref to create nicer references using vref
-\usepackage[ngerman]{varioref}
+%\usepackage[ngerman]{varioref}
+\usepackage[english]{varioref}
 \PassOptionsToPackage{hyphens}{url} % allow line break at hyphens in URLs
 \usepackage{hyperref}
 
 % setup hyperref
 \hypersetup{breaklinks=true,
             pdfborder={0 0 0},
-            ngerman,
+            %ngerman,
+            english,
             pdfhighlight={/N},
             pdfdisplaydoctitle=true}
 
@@ -158,17 +229,27 @@
 
 % Allow todos
 \usepackage{todonotes}
+%\setuptodonotes{fancyline, color=dangercolor!50}
+
+\newcommand{\tinytodo}[2][]{\todo[caption={#2}, size=\footnotesize, fancyline, color=dangercolor!50, #1]{\renewcommand{\baselinestretch}{0.5}\textsf{#2}\par}}
+
+
+\usepackage{array}
+\newcolumntype{R}{>{$}r<{$}}
+\newcolumntype{L}{>{$}l<{$}}
+\newcolumntype{M}{R@{${}={}$}L}
+
 
 % define german names for referenced elements
 % (vref automatically inserts these names in front of the references)
-\labelformat{figure}{Abbildung\ #1}
-\labelformat{table}{Tabelle\ #1}
-\labelformat{appendix}{Anhang\ #1}
-\labelformat{chapter}{Kapitel\ #1}
-\labelformat{section}{Abschnitt\ #1}
-\labelformat{subsection}{Unterabschnitt\ #1}
-\labelformat{subsubsection}{Unterunterabschnitt\ #1}
-\AtBeginDocument{\labelformat{lstlisting}{Quelltext\ #1}}
+\labelformat{figure}{Figure\ #1}
+\labelformat{table}{Table\ #1}
+\labelformat{appendix}{Appendix\ #1}
+\labelformat{chapter}{Chapter\ #1}
+\labelformat{section}{Section\ #1}
+\labelformat{subsection}{Subsection\ #1}
+\labelformat{subsubsection}{Subsubsection\ #1}
+\AtBeginDocument{\labelformat{lstlisting}{Listing\ #1}}
 
 % define theorem environments
 \declaretheorem[numberwithin=chapter,style=plain]{Theorem}

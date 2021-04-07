@@ -5,15 +5,15 @@
 
   \vskip1cm
 
-  \pgfimage[height=2.5cm]{uni-logo-example\imagesuffix}
+  \includegraphics[height=2.5cm]{uni-luebeck-logo.pdf}
   
   \vskip2.5cm
   
   \LARGE
+  {\sffamily\color{maincolor}How to write a Master's Thesis?}
   
-  \textbf{\sffamily\color{maincolor}Wie schreibe ich eine Masterarbeit?}
-
-  \textit{How to Write a Master Thesis?}
+\Large
+\textit{Wie schreibe ich eine Masterarbeit?}
 
   \normalfont\normalsize
 
@@ -26,9 +26,10 @@
   der Universität zum Beispiel
 
   \vskip1em
+  
 
   vorgelegt von \\
-  \textbf{\sffamily\color{maincolor}Max Mustermann}
+  \textbf{\sffamily\color{maincolor}Max Mustermann, B.Sc.}
 
   \vskip1em
   
@@ -38,14 +39,21 @@
   \vskip1em
 
   mit Unterstützung von\\
-  Lieschen Müller
+  \sffamily\color{maincolor}{Lieschen Müller}
 
   \vskip1em
-
-  Die Arbeit ist im Rahmen einer Tätigkeit bei der Firma Muster GmbH entstanden.
-
 
   \vfill
 
   Musterhausen, den \duedate
+
+  
+	\raggedright
+    \noindent\hfill{%
+      \setbox0=\hbox{\lower2.1cm\hbox{\includegraphics[scale=1]{uni-luebeck-slogan.pdf}}\kern-1.1cm}%
+      \dp0=0pt%
+      \box0%
+    }%
+    \clearpage
+  
 \end{titlepage}
