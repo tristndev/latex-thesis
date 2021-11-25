@@ -81,7 +81,7 @@
 \usepackage{tabularx}
 
 % load the color package and enable colored tables
-\usepackage[table]{xcolor}
+\usepackage[table, dvipsnames]{xcolor}
 
 % define new environment for zebra tables
 \newcommand{\mainrowcolors}{\rowcolors{1}{maincolor!25}{maincolor!5}}
@@ -269,3 +269,24 @@ minor tick num=1, axis x line=middle, axis y line=middle, every inner x axis lin
 
 \declaretheorem[sibling=Theorem,style=definition]{Bemerkung}
 \labelformat{Bemerkung}{Bemerkung\ #1}
+
+
+% Remove "Chapter" prefix from page headings (Kopfzeile)
+\renewcommand*\chaptermarkformat{\thechapter\autodot\enskip}
+
+% Change chapter heading style.
+\KOMAoptions{chapterprefix=true}
+
+\RedeclareSectionCommand[
+  beforeskip=\dimexpr3.3\baselineskip+1\parskip\relax,
+  innerskip=0pt,% <- space between chapter number and chapter title
+%  afterskip=1.725\baselineskip plus .115\baselineskip minus .192\baselineskip
+  afterskip=1.5\baselineskip plus .115\baselineskip minus .192\baselineskip
+]{chapter}
+\renewcommand\raggedchapter{\raggedright}
+\renewcommand\chapterformat{{\fontsize{80pt}{80pt}\selectfont\textcolor{gray!25}{\thechapter}}}
+\renewcommand\chapterlineswithprefixformat[3]{%
+  #2#3%
+  \vspace*{-.5\baselineskip}% <- adjust the space between the chapter and the rule here
+  \rule{\textwidth}{.4pt}\par\nobreak
+}%

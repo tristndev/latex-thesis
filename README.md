@@ -6,7 +6,11 @@ Based on the great [thesis template of Malte Schmitz](https://www.mlte.de/latex/
 
 * 🌍 Prepared for a thesis written in English  (but most contents left in German as in the original repository)
 * 🏡 Prepared for a thesis at the University of Lübeck blau(Logo taken from their [corporate design page](https://www.uni-luebeck.de/universitaet/im-ueberblick/corporate-design.html)).
-* 📘 Changed the colors (away from orange) and formatted some elements differently.
+* 📘 Style changes:
+  * :rainbow: Changed the colors (away from orange) and formatted some elements differently.
+  * :notebook_with_decorative_cover: Changed the chapter headings to span two lines (separation between chapter number and title)
+  * :star: Some other miscellaneous changes
+
 
 > **Note**: For a slick b/w version, simply enable the `schema-gray` in the `thesis.tex` file by commenting out `schema-color`. 
 
